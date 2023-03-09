@@ -2,13 +2,13 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import * as NextImage from 'next/image';
 import React from 'react';
-import '../pages/globals.css';
+import '../app/globals.css';
 
 const BREAKPOINTS_INT = {
   xs: 375,
-  sm: 600,
-  md: 900,
-  lg: 1200,
+  sm: 768,
+  md: 1024,
+  lg: 1280,
   xl: 1536,
 };
 
