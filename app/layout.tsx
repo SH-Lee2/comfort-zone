@@ -1,3 +1,6 @@
+'use client';
+
+import { Footer, Header } from '../components';
 import './globals.css';
 
 export default function RootLayout({
@@ -7,7 +10,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

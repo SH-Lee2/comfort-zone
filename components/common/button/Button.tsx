@@ -3,25 +3,31 @@ import styles from './Button.module.css';
 
 interface ButtonProps {
   /**
-   * Is this the principal call to action on the page?
+   * 페이지 내부에서 중요 버튼인지 체크
    */
-  primary?: boolean;
+  primary: boolean;
   /**
-   * What background color to use
+   * 버튼 배경 색
+   * @default transparent
    */
-  backgroundColor?: string;
+  backgroundColor: string;
   /**
-   * How large should the button be?
+   * 버튼 사이즈
    */
-  size?: 'small' | 'medium' | 'large';
+  size: 'small' | 'medium' | 'large';
   /**
    * Button contents
    */
   label: string;
+
+  /**
+   * 버튼 타입
+   */
+  type: 'button' | 'submit' | 'reset';
   /**
    * Optional click handler
    */
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 /**
@@ -32,14 +38,15 @@ const Button = ({
   size = 'medium',
   backgroundColor,
   label,
+  type = 'button',
   ...props
-}: ButtonProps) => {
+}: Partial<ButtonProps>) => {
   const mode = primary
     ? 'storybook-button--primary'
     : 'storybook-button--secondary';
   return (
     <button
-      type="button"
+      type={type}
       className={[
         `${styles['storybook-button']}`,
         `${styles[`storybook-button--${size}`]}`,
