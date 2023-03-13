@@ -19,11 +19,6 @@ interface ButtonProps {
    * Button contents
    */
   label: string;
-
-  /**
-   * 버튼 타입
-   */
-  type: 'button' | 'submit' | 'reset';
   /**
    * Optional click handler
    */
@@ -38,7 +33,6 @@ const Button = ({
   size = 'medium',
   backgroundColor,
   label,
-  type = 'button',
   ...props
 }: Partial<ButtonProps>) => {
   const mode = primary
@@ -46,13 +40,12 @@ const Button = ({
     : 'storybook-button--secondary';
   return (
     <button
-      type={type}
       className={[
         `${styles['storybook-button']}`,
         `${styles[`storybook-button--${size}`]}`,
         `${styles[mode]}`,
+        `${backgroundColor && backgroundColor}`,
       ].join(' ')}
-      style={{ backgroundColor }}
       {...props}
     >
       {label}
