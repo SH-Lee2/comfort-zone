@@ -6,8 +6,18 @@
   .header {
     @apply flex items-center justify-between border-b-[1px] p-4 md:px-8;
   }
-
   .footer {
     @apply grid justify-between gap-y-4 bg-slate-700 p-4 md:grid-flow-col md:p-8;
+  }
+
+  .backdrop {
+    @apply fixed inset-0 z-10 hidden h-full min-h-screen min-w-full bg-black/50 transition-all duration-150 sm:block;
+  }
+  .modal {
+    @apply fixed top-1/2 left-1/2 z-20 flex h-full w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center bg-white/80 px-10 py-10 sm:h-auto sm:w-auto sm:rounded-md sm:shadow-md;
+  }
+
+  .login-btn {
+    @apply flex w-[250px] justify-center gap-x-2 rounded-sm bg-white py-4 shadow-md transition-all duration-150 hover:bg-slate-300/50;
   }
 }
