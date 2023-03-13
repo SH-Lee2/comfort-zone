@@ -1,31 +1,15 @@
 'use client';
 
+import { useSession, signOut } from 'next-auth/react';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '..';
-
-interface User {
-  name: string;
-  profileImg: string;
-}
+import { LoginModal } from '../loginModal';
 
 const Header = () => {
-  const [user, setUser] = useState<User | null>({
-    name: 'Jane Doe',
-    profileImg:
-      'https://res.cloudinary.com/dz6bdal71/image/upload/v1673463893/profile_2_uyllpy.png',
-  });
-  const onLogin = () => {
-    console.log('hi');
-  };
-  const onCreateAccount = () => {
-    console.log('hi');
-  };
-  const onLogout = () => {
-    console.log('hi');
-    setUser(null);
-  };
-
+  const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <header>
       <div className="header">
@@ -57,31 +41,31 @@ const Header = () => {
           </h1>
         </div>
         <div className="flex gap-x-2">
-          {user && (
+          {session && (
             <>
               <Image
-                src={user.profileImg}
+                src={session?.user?.image!}
                 alt="profile"
                 width={32}
                 height={32}
                 className="block rounded-full"
               />
-              <Button size="small" onClick={onLogout} label="Log out" />
+              <Button size="small" onClick={signOut} label="Log out" />
             </>
           )}
-          {!user && (
+          {!session && (
             <>
-              <Button size="small" onClick={onLogin} label="Log in" />
               <Button
                 primary
                 size="small"
-                onClick={onCreateAccount}
-                label="Sign up"
+                onClick={() => setIsOpen(true)}
+                label="Log in"
               />
             </>
           )}
         </div>
       </div>
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </header>
   );
 };
